@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+同源策略 ：
+统一资源定位符，俗称网址，resource 包括 html css js 图片等内容
+
+源： 包括 协议 域名 端口
+http 默认端口 80  https 443
+同源策略是 浏览器的 一个 安全机制功能
+
+同源 是当 协议 域名 端口 一致时成为同源
+不同源客户端脚本在没有明确授权下，不能读写对方资源
+简单的理解就是 同源策略是浏览器的一种 考虑安全的 非常重要的策略
+
+同源策略的意义 ：
+不允许不同域名的网址之间进行 调用ajax XMLHttpRequest
+
+同源策略限制 ：
+cookie localStorage indexedDB
+dom
+ajax
+
+www.bukaedu.com
+子域名 主域名
+
+
+
+基本版 请求步骤 ：
+环境  ： 浏览器地址栏输入 bukaedu.com enter
+1、对bukaedu.com 进行DNS 解析 得到相应的IP地址
+2、根据IP地址 找到服务器，与TCP进行三次握手（与服务器建立联系）
+3、与TCP建立联系后，发起HTTP请求
+4、服务器响应http协议，拿到html代码
+5、对html代码进行解析，请求html代码 （下载html css js 图片等）
+6、浏览器对页面进行渲染
+7、服务器关闭TCP
+
+index.html  解析html  下载css js 图片  生成 dom树css渲染树   html渲染树
+计算元素的位置大小 （重排/回流）  呈现页面（重绘）
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

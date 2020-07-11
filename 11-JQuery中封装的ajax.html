@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="js/jquery-1.12.4.min.js"></script>
+<script>
+    $.ajax({
+        cache : false, // 浏览器是否缓存 不缓存
+        url : 'https://autumnfish.cn/api/joke',
+        type : 'get',
+        // dataType : 'json', // 预期服务器响应数据类型
+        contentType : false, // 请求体内容类型
+        data : {
+            name : 'jack'
+        },
+        // timeout : 12,
+        beforeSend : function(backData) {
+            console.log(backData,"之前")
+        },
+        success : function(res){
+            console.log(res)
+        },
+        error : function(err){
+            console.log(err)
+        },
+        complete : function(backData){
+            console.log(backData,"------")
+        }
+    })
+
+
+
+
+
+</script>
+</body>
+</html>

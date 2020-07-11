@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // XMLHttpRequest2.0 是html5以后 对XMLHttpRequest 全面升级
+
+    // 1、response / responseType
+    // responseType 预期服务器返回数据类型
+    // "" 空
+    // text
+    // json
+    //document
+    // response 通过responseType的值 自动处理返回的结果 可以是任何类型
+
+    // 2、onload / onprogress
+    // onload readyState === 4 请求完成后触发 完全接收服务器返回的数据
+    // onprogress readyState === 3 请求过成中触发
+
+    // onreadystatechange 事件 xhr.readyState 发生改变时触发
+    // xhr对象状态
+    // 0 --》创建xhr对象 没调用open（）
+    // 1 --》调用open（）
+    // 2 --》调用send（）
+    // 3 --》响应体下载中 responseText 部分可以使用
+    // 4 --》响应体下载完成 responseText 可以调用
+
+    // status 获取状态吗 === 200 请求没问题
+    // readyState === 4 请求体下载完成
+    // onload 请求完成
+    // responseText 获取响应体 文本格式
+    // responseXMl xml格式
+
+    var xhr = new XMLHttpRequest();
+    // 初始化请求
+    xhr.open('get','https://autumnfish.cn/api/joke');
+    // 发送请求
+    xhr.send();
+    // 拿到服务器的结果
+    xhr.onreadystatechange = function(){ // 当readyState 改变时触发
+        if (xhr.status === 200 && xhr.readyState === 4){
+            // 请求没问题  响应体接收完毕
+            console.log(xhr.responseText);
+        }
+
+    }
+
+    //------------------------------------------------------------
+
+    // 3、补充
+    // 3、1 同步异步
+    // 同步只能做一件事
+    // 异步 同时做多件事
+    // open（） 第三个参数 可以传同步异步 默认true异步  false 同步
+
+    // 3、2 兼容
+    // var xhr = XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
+
+    // 3、3 api
+    // xhr.send(responseBody) 发送请求体
+    // xhr.setRequestHeader（key，value） 设置请求头
+    // xhr.getResponseHeader（key） 获取响应头
+
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

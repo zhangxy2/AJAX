@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script>
+    // ajax 请求步骤 ：
+    // 1、创建xhr对像
+    // 2、初始化请求
+    // 3、发送请求
+    // 4、注册onload事件 从服务器拿到结果
+
+    // get请求 post 请求 区别
+    // get ？拼接 传参 key=value&key=value
+    // post 更安全 容量更大
+
+    //get 请求
+  /*  var xhr = new XMLHttpRequest();
+    xhr.open('get','a/b/c');
+    xhr.send();
+    xhr.onload = function(){
+        console.log(xhr.responseText);
+    }*/
+
+    // post 请求 和get方法一样 但是在初始化请求后 设制在请求头
+
+ /*   var xhr = new XMLHttpRequest();
+    xhr.open('post','a/b');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+    xhe.onload = function(){
+        console.log(xhr.responseText);
+    }*/
+
+
+    // jquery中的ajax
+  /*  $.get({
+        url : 'a/b/c',
+        data : {
+            name : 'jack'
+        },
+        success : function (backData) {
+            console.log(backData)
+        },
+        error : function(err){
+            console.log(err)
+        }
+    })*/
+
+
+/*    $.post({
+        url : 'a/b/c',
+        data : {
+            name : 'jack'
+        },
+        success : function (backData) {
+            console.log(backData)
+        },
+        error : function(err){
+            console.log(err)
+        }
+    })*/
+
+    // 数据传递 ： 不同请求方式数据传递方式不同
+    // get url？key=value&key=value
+    // post xhr.open(key=value&key=value)
+
+    // 数据格式
+    // 一条数据
+    // xhr.send(key&value)
+    // 多条数据
+    // xhr.send(key&value&key=value)
+    // 没有数据
+    // xhr.send() / xhr.send(null) / xhr.send(undefined)
+
+
+    // 通用
+    $.ajax({
+        cache : false, // ie浏览器是否缓存 不缓存
+        url : 'a/d',
+        type : "get", // type/method : get/post
+        dataType : 'json', //  预期服务器 响应数据类型
+        contentType : false, // 请求体内容类型
+        data : {
+            name : 'rose',
+            age : 12
+        },
+        timeout : 5,
+        beforeSend : function(backData){
+            console.log(backData)
+        },
+        success : function(backData){
+            console.log(backData)
+        },
+        error : function (err) {
+            console.log(err)
+        },
+        complete : function(backData){
+            console.log(backData)
+        }
+    })
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

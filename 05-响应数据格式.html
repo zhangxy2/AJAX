@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // 响应数据格式
+    // ajax在传输数据时，将数据转换为浏览器和服务器都认识的  JSON XML
+
+    // JSON 通过字符串描述数据的手段  本质 字符串
+    /**
+     * json 书写语法 ：
+     * 1、json 属性名必须加引号
+     * 2、json 描述字符串 带引号
+     * 3、json中没有 undefined
+     * 4、json 不要写 单行 多行注释
+     * 5、一个完整的json 中 没有其他内容掺杂
+     */
+
+
+        // json转化
+        // json格式 转为 js数据
+        // JSON.parse（）
+    var data = `{
+            "student": {
+                "stu1": {
+                    "name": "jack",
+                    "age": 18,
+                    "sex": "male"
+                },
+                "stu2": {
+                    "name": "rose",
+                    "age": 16,
+                    "sex": "female"
+                }
+            }
+        }`
+    console.log(data);
+    var js = JSON.parse(data);
+    console.log(js);
+
+
+    // js 数据 转为 json 格式
+    // JSON.stringify（）
+    var json = JSON.stringify(js);
+    console.log(json);
+
+
+    // XML 描述数据的手段 被淘汰  代码冗乱  若返回XML  看作document对象来处理
+    /**
+     * XML语法：
+     * 1、头 <? xml verson = 1.0 encoding = "UTF-8"?>
+     * 2、和html差不多
+     * 3、有且只有一个根目录
+     * 4、标签区分大小写
+     * 5、标签闭合
+     * 6、属性值带引号
+     */
+
+
+    /**
+     * 无论是json xml 都只是数据协议罢了 在ajax传输过程中用到的 没有必然关系
+     * 无论是 服务端采用 json xml 本质都是将数据返回客户端 响应
+     */
+
+
+
+</script>
+</body>
+</html>

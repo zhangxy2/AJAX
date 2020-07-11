@@ -1,0 +1,14 @@
+{
+  "student" : {
+    "stu1" : {
+      "name" : "jack",
+      "age" : 18,
+      "sex" : "male"
+    },
+    "stu2" : {
+      "name" : "rose",
+      "age" : 16,
+      "sex" : "female"
+    }
+  }
+}

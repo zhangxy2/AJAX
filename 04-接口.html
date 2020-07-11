@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button class="btn">按钮</button>
+<p></p>
+<script>
+    // 接口 ： ajax请求数据时，请求地址不是随便写的，而是服务器接口
+    //要看接口文档 ： 请求地址 请求方式 请求参数
+
+    // 案例 ： joke
+    /**
+     * 请求地址 ： http://autumnfish.cn/api/joke
+     * 请求方式 ： get
+     * 请求参数 ： 无
+     */
+
+    var btn = document.querySelector('.btn');
+    btn.addEventListener('click', function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', 'https://autumnfish.cn/api/joke');
+        xhr.send();
+        xhr.onload = function () {
+            console.log(xhr.responseText);
+            var p = document.querySelector('p');
+            p.innerHTML = xhr.responseText
+        }
+    })
+
+
+</script>
+</body>
+</html>

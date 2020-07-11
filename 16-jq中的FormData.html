@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="" method="get" name="" id="fm">
+    <div class="box1">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="box2">
+        <label for="pwd">密码</label>
+        <input type="password" id="pwd" name="pwd">
+    </div>
+    <input type="submit" id="submit">
+</form>
+
+<script src="js/jquery-1.12.4.min.js"></script>
+<script>
+    $("#submit").click(function(e){
+        e.preventDefault();
+
+        // 获取表单数据
+        var fm = new FormData($('form')[0])
+
+        // ajax
+        $.ajax({
+            url : "https://autumnfish.cn/api/joke",
+            method : 'post',
+            data : fm,
+
+            // 取消设Content-type
+            contentType : false,
+            // ajax 将 表单数据转为字符串  jq取消 转为字符串 直接传 fm数据
+            processData : false,
+            success : function(backData){
+                console.log(backData)
+            }
+        })
+
+    })
+
+
+
+
+
+</script>
+</body>
+</html>

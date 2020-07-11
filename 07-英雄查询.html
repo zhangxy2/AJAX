@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" placeholder="请输入英雄">
+<br>
+别称<p id="p1"></p>
+简介<p id="p2"></p>
+<img src="" alt="">
+<script>
+    /**
+     * 1、enter keyup 事件
+     * 2、请求后端接口
+     *      请求地址 ：https://autumnfish.cn/api/hero/info
+     *       请求方式 ： get
+     * 3、获取数据 渲染到页面
+     */
+    var img = document.querySelector('img')
+    var inp = document.querySelector('input');
+    inp.onkeyup = function (e) {
+        if (e.keyCode === 13) {
+            var val = inp.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', 'https://autumnfish.cn/api/hero/info?name=' + val);
+            xhr.send();
+            xhr.onload = function () {
+                console.log(xhr.responseText);
+                var js = JSON.parse(xhr.responseText);
+
+                p1.innerHTML = js.title;
+                p2.innerHTML = js.story;
+                img.src = js.bg;
+                inp.value = "";
+            }
+
+
+        }
+    }
+
+</script>
+</body>
+</html>

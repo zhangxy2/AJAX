@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='https://unpkg.com/nprogress@0.2.0/nprogress.js'></script>
+    <link rel='stylesheet' href='https://unpkg.com/nprogress@0.2.0/nprogress.css'/>
+</head>
+<body>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script>
+    // jq中封装的-- 全局事件处理-ajax进度提示插件
+    $.ajaxSetup({
+        beforeSend : function(){
+
+        },
+        complete : function(){
+            console.log("完成")
+        }
+    })
+
+    $.ajax({
+        url : "https://autumnfish.cn/api/joke",
+        type : 'get',
+        data : {
+            name : 'jack'
+        },
+        beforeSend : function(){
+            NProgress.start();
+            console.log("之前")
+        },
+        success : function(backData){
+            console.log(backData)
+            console.log("请求成功触发")
+            NProgress.done();
+        }
+
+
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

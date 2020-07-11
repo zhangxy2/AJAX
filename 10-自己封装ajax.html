@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // 自己封装ajax
+    /**
+     * param ： 请求地址 string url
+     * param ： 请求方式 string method
+     * param ： 请求参数 object params
+     * param ： 请求完成后做的事情 function done
+     */
+    function ajax(url, method, params, done) {
+        // 传进来的 method 都转为 大写
+        method = method.toUpperCase();
+
+        // 遍历请求参数（object） 转为 key=value&key=value
+        var arr = [];
+        for (var key in params) {
+            arr.push(key + "=" + params[key]); // 把键值对 存进 arr
+        }
+        var res = arr.join("&"); // arr 用 & 替换 最后转为键值对形式
+
+        // ajax请求
+
+        // 兼容
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
+
+        if (method === "GET") {
+            url = url + "?" + res;
+        }
+
+        var data = null;
+
+        // 初始化请求
+        xhr.open(method, url);
+
+        if (method === "POST") {
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            data = res;
+        }
+
+        // 发送请求
+        xhr.send(data);
+
+        // 注册onload 事件
+        xhr.onreadystatechange = function(){
+            if (xhr.status === 200 && xhr.readyState === 4){
+                if (done) {
+                    done(xhr.responseText);
+                }
+            }
+        }
+
+    }
+    ajax('https://autumnfish.cn/api/joke','get',{name : 'jack'},function(res){
+        console.log(res,6666666)
+    })
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

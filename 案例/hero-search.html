@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css"/>
+    <style>
+        body {
+            /* background-image: url('http://img.badapple.top/东方Project/十六夜咲夜/img (7).jpg') */
+        }
+    </style>
+</head>
+<body>
+<img src="./img/header.png" alt="" class="header"/>
+
+
+<div class="cq-wrap">
+    <!-- 导航 -->
+    <div class="nav">
+        <ul>
+            <li><img src="./img/sword.png" alt=""/><span>剑士</span></li>
+            <li><img src="./img/knight.png" alt=""/> <span>骑士</span></li>
+            <li><img src="./img/Archer.png" alt=""/> <span>弓手</span></li>
+            <li><img src="./img/hunter.png" alt=""/> <span>猎人</span></li>
+            <li><img src="./img/magic.png" alt=""/> <span>法师</span></li>
+            <li><img src="./img/flamen.png" alt=""/> <span>祭司</span></li>
+        </ul>
+    </div>
+    <!-- table -->
+    <table class="cq-list">
+        <thead>
+        <th>勇士</th>
+        <th>技能</th>
+        <th>武器</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<!-- 遮罩层 -->
+<div class="cover" style="display: none">
+    <img class="loading" src="./img/loading01.gif" alt=""/>
+</div>
+</body>
+</html>
+
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/template-web.js"></script>
+<script type="text/template" id="temp">
+    {{each data.heros}}
+    <tr>
+        <td>
+            <img
+                    class="icon"
+                    src="{{$value.heroIcon}}"
+                    alt=""
+            />
+            <span>{{$value.heroName}}</span>
+        </td>
+        <td>
+            <img
+                    class="skill"
+                    src="{{$value.skillIcon}}"
+                    alt=""
+            />
+            {{$value.skillName}}
+        </td>
+        <td>
+            <img
+                    class="weapon"
+                    src="{{$value.weaponIcon}}"
+                    alt=""
+            />
+            {{$value.weaponName}}
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<script>
+    /**
+     * 1、点击导航
+     * 2、加类名 改变颜色
+     * 3、调用ajax接口 获取数据
+     * 4、模版引擎渲染数据
+     */
+
+    $('.nav li').click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+
+        var type = $(this).children('span').html();
+        console.log(type);
+        // ajax
+        $.ajax({
+            url: 'https://autumnfish.cn/api/cq/category',
+            type: 'get',
+            data: {
+                type: type
+            },
+            success: function (backData) {
+                console.log(backData);
+
+                var html = template('temp', backData)
+                console.log(html)
+                $('tbody').html(html);
+            }
+        })
+    })
+    $('li').first().click() // 默认显示第一个
+
+    /**
+     * 1、点击图片
+     * 2、出现遮罩
+     * 3、ajax请求 gif动图
+     * 4、点击空白处 关闭
+     */
+
+    $('tbody').on('click', '.icon', function () {
+        $('.cover').show(); // 遮罩显示
+
+        var name = $(this).siblings('span').html();
+        // ajax
+        $.ajax({
+            url: 'https://autumnfish.cn/api/cq/gif',
+            data: {
+                name: name
+            },
+            success: function (backData) {
+                console.log(backData);
+                $('.loading').attr('src', backData.data.skillGif)
+            }
+        })
+    })
+
+    /**
+     * 1、点击空白区域
+     * 2、关闭遮罩
+     */
+    $('.cover').click(function(){
+        $(this).fadeOut(function () {
+            //换回loading的 src
+            $('.cover .loading').attr('src','./img/loading01.gif')
+        })
+    })
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

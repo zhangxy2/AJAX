@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="w">
+    <p class="mess1"></p>
+    <label for="username">用户名</label>
+    <input type="text" placeholder="请输入用户名" id="username">
+    <input type="button" value="注册" class="btn">
+    <p class="mess2"></p>
+</div>
+
+
+<script>
+    /**
+     * 1、按钮绑定点击事件
+     * 2、失去光标 调用后端接口
+     *      请求方式 ： post
+     *      请求地址 ： https://autumnfish.cn/api/user/check
+     * 3、mess1 显示验证中。。。
+     * 4、请求结果渲染到mess1
+     * 5、点击注册 调用后端接口
+     *      请求方式 ： post
+     *      请求地址 ： https://autumnfish.cn/api/user/reqister
+     * 6、mess2 显示注册中。。。
+     * 7、请求结果渲染到mess2
+     */
+
+    var mess1 = document.querySelector('.mess1')
+    var mess2 = document.querySelector('.mess2')
+    var username = document.querySelector('#username')
+    var btn = document.querySelector('.btn');
+    username.onblur = function () {
+        if (this.value != "") {
+            var val = username.value;
+            mess1.innerHTML = "验证中...";
+            // ajax
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', 'https://autumnfish.cn/api/user/check');
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.send("username=" + val);
+            xhr.onload = function () {
+                console.log(xhr.responseText)
+                mess1.innerHTML = xhr.responseText;
+            }
+        }
+    }
+
+    btn.onclick = function () {
+        if (username.value  === "") {
+            alert("username 为空");
+            return;
+        }
+        var val = username.value;
+        mess2.innerHTML = "注册中...";
+        // ajax
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', 'https://autumnfish.cn/api/user/register');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send("username=" + val);
+        xhr.onload = function () {
+               console.log(xhr.responseText)
+               mess2.innerHTML = xhr.responseText;
+        }
+    }
+
+
+</script>
+</body>
+</html>

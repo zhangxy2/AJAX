@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>天知道</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/iconfont.css"/>
+    <link rel="stylesheet" href="css/main2.css"/>
+
+    <style>
+        .tem .iconfont {
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="search_form">
+        <div class="logo"><img src="img/logo.png" alt="logo"/></div>
+        <div class="form_group">
+            <input type="text" class="input_txt" placeholder="请输入查询的天气"/>
+            <button class="input_sub">搜 索</button>
+        </div>
+        <div class="hotkey">
+            <a href="javascript:;">北京</a
+            ><a href="javascript:;">上海</a
+        ><a href="javascript:;">广州</a
+        ><a href="javascript:;">深圳</a>
+        </div>
+    </div>
+    <!-- 放置天气信息的父盒子 -->
+    <ul class="weather_list">
+        <!-- 下面是一条天气信息的结构 -->
+        <!-- <li>
+          <div class="info_type">
+            <span class="iconfont">&#xe932;</span>
+          </div>
+          <div class="info_temp">高 <b>32℃</b><br />低 32℃</div>
+          <div class="info_date"><b>深圳</b><span>5月19日</span></div>
+        </li>-->
+    </ul>
+</div>
+
+</body>
+</html>
+
+<!--引入jq-->
+<script src="./js/jquery-1.12.4.min.js"></script>
+<!--引入 template-->
+<script src="js/template-web.js"></script>
+
+<!--定义模版-->
+<script type="text/template" id="temp">
+   {{each data.forecast}}
+    <li>
+        <div class="info_type">
+            {{if $value.type === "多云"}}
+            <span class="iconfont">&#xe932;</span>
+            {{else if $value.type === "雷阵雨"}}
+            <span class="iconfont">&#xe931;</span>
+            {{else if $value.type === "中雨"}}
+            <span class="iconfont">&#xe933;</span>
+            {{/if}}
+        </div>
+        <div class="info_temp">高 <b>{{$value.high.split(" ")[1]}}</b><br />低 {{$value.low.split(" ")[1]}}</div>
+        <div class="info_date"><b>{{city}}</b><span>{{Month}}月{{$value.date.split("日")[0]}}日</span></div>
+    </li>
+    {{/each}}
+</script>
+
+<script>
+    /**
+     * 1、按钮 点击 事件
+     * 2、ajax调用后端接口
+     *      请求地址 ： http://wthrcdn.etouch.cn/weather_mini
+     *      请求方式 ： get
+     *      请求参数 ： city 搜索框的value值
+     * 3、调用模版引擎 渲染到页面
+     */
+
+    $(".input_sub").click(function(){
+        var val = $(".input_txt").val();
+
+        // ajax
+        $.ajax({
+            url : "http://wthrcdn.etouch.cn/weather_mini",
+            method : "get",
+            dataType : "json",
+            data : {
+                city : val
+            },
+            success : function(backData){
+                console.log(backData);
+                var date = new Date();
+                var res = date.getMonth() + 1;
+                backData.Month = res;
+
+                $(".input_txt").val("");
+
+                // 调用template
+                var html = template("temp",backData);
+                $(".weather_list").html(html);
+
+            }
+        })
+
+
+
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+<?xml verson='1.0' encoding='UTF-8'?>
+
+<students>
+    <stu id="1">
+        <name>jack</name>
+        <age>12</age>
+        <other weight="65kg" height="180cxm"/>
+    </stu>
+
+    <stu id="2">
+        <name>rose</name>
+        <age>16</age>
+        <other weight="45kg" height="160cxm"/>
+    </stu>
+</students>

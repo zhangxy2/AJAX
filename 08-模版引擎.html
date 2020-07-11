@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box"></div>
+
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/template-web.js"></script>
+<script type="text/template" id="temp">
+    {{each $data.student}}
+    <h3>{{$value.name}}</h3>
+    <p>{{$value.age}}</p>
+    <em>{{$value.sex}}</em>
+    {{/each}}
+</script>
+<script>
+    /**
+     * 模版引擎 ： 当我们从后端请求到数据时，最常多的将数据呈现到页面上，模版引擎是api ，更高效简单的将
+     * 数据渲染到html页面
+     */
+
+    /**
+     * 模版引擎使用步骤：
+     * 1、准备一个准数据的盒子
+     * 2、引入template
+     * 3、定义模版 必须带 type id
+     * 4、调用模版
+     *      参数1 模版id
+     *      参数2 传入的数据
+     *      返回值
+     * 5、将数据放到准备的盒子里
+     */
+
+    /**
+     * 模版引擎语法 ：
+     * 普通字符串 {{$data}} {{$data.name}} {{name}}
+     * 判断 {{if age>18}}大于18{{else}}小于18{{/if}}
+     * 对象 {{each 遍历的数据}} {{/each}} --> {{$value}} {{$index}}
+     */
+
+    var data = {
+        student: {
+            "stu1": {
+                "name": "jack",
+                "age": 18,
+                "sex": "male"
+            },
+            "stu2": {
+                "name": "rose",
+                "age": 16,
+                "sex": "female"
+            }
+        }
+    }
+    console.log(data)
+    var html = template('temp', data);
+    box.innerHTML = html;
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

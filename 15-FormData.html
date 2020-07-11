@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="" method="get" name="" id="fm">
+    <div class="box1">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="box2">
+        <label for="pwd">密码</label>
+        <input type="password" id="pwd" name="pwd">
+    </div>
+    <input type="submit" id="submit">
+</form>
+
+<script>
+    // FormData h5 新增的内置对象
+    // 用来提交表单数据 将表单数据编译成键值对形式 便于XMLHttpRequest 发送数据
+    // 通过input name 属性 将数据转为键值对形式
+    var submit = document.querySelector('#submit');
+    submit.onclick = function(e){
+        e.preventDefault(); // 阻止 submit 自己提交表单数据
+
+        // 获取表单数据
+        var form = document.querySelector("form");
+        var formData = new FormData(form);
+        console.log(formData)
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('get','/a/c/d');
+        xhr.send(formData);
+        xhr.onload = function(){
+            console.log(xhr.responseText)
+            console.log(formData)
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>
